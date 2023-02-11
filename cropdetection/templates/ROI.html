@@ -1,0 +1,474 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href=" {% static 'img/plantation.png' %} ">
+  <link rel="icon" type="image/png" href=" {% static 'img/plantation.png' %} ">
+  <title>
+    Crop Prediction 
+  </title>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href=" {% static 'css/nucleo-icons.css' %} " rel="stylesheet" />
+  <link href=" {% static 'css/nucleo-svg.css' %} " rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href=" {% static 'css/material-dashboard.css' %} " rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" target="_blank">
+        <img src=" {% static 'img/plantation.png' %} " class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-1 font-weight-bold text-white">Crop Prediction</span>
+      </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white" href=" {% url 'home' %} ">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">home</i>
+            </div>
+            <span class="nav-link-text ms-1">Home</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white " href=" {% url 'webpage1' %}  ">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">dashboard</i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href=" {% url 'webpage2' %}  ">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Tables</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white active bg-gradient-primary" href=" {% url 'webpage3' %}  ">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">Returns</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white " href=" {% url 'webpage4' %}  ">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">notifications</i>
+            </div>
+            <span class="nav-link-text ms-1">Notifications</span>
+          </a>
+        </li>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href=" {% url 'webpage5' %}  ">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <span class="nav-link-text ms-1">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href=" {% url 'webpage6' %}  ">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">login</i>
+            </div>
+            <span class="nav-link-text ms-1">Sign In</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href=" {% url 'webpage7' %}  ">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">assignment</i>
+            </div>
+            <span class="nav-link-text ms-1">Sign Up</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+      
+          <h6 class="font-weight-bolder mb-0">Returns</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group input-group-outline">
+              <label class="form-label">Type here...</label>
+              <input type="text" class="form-control">
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href=" {% static '' %} ">Crop</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href=" {% static '../pages/sign-in.html' %} " class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none">Sign In</span>
+              </a>
+            </li>
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a href=" {% static 'javascript:;' %} " class="nav-link text-body p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item px-3 d-flex align-items-center">
+              <a href=" {% static 'javascript:;' %} " class="nav-link text-body p-0">
+                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href=" {% static 'javascript:;' %} " class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-bell cursor-pointer"></i>
+              </a>
+              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href=" {% static 'javascript:;' %} ">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src=" {% static 'img/team-2.jpg' %} " class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New message</span> from Santhosh
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          13 minutes ago
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+    
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href=" {% static 'javascript:;' %} ">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src=" {% static 'img/small-logos/logo-spotify.svg' %} " class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New album</span> by Travis Scott
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          1 day
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item border-radius-md" href=" {% static 'javascript:;' %} ">
+                    <div class="d-flex py-1">
+                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>credit-card</title> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero"> <g transform="translate(1716.000000, 291.000000)"> <g transform="translate(453.000000, 454.000000)"> <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path> <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path> </g> </g> </g> </g> </svg>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          Payment successfully completed to santhosh
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          2 days
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+        </div>
+      </div>
+    </nav>
+    <br><br>
+    <div class="container-fluid py-4">
+    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+      <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+        <h5 class="text-white text-capitalize ps-3">Return On Investment</h5>
+      </div>
+    </div>
+    </div>
+    
+    <!-- End Navbar -->
+    <br>
+<div class="d-flexxx flex-column h-100" >
+  
+  <br><br>
+  </div>
+	<div class="container">
+		<div class="form-header">
+		  
+		 
+		</div>
+		<!-- ROI.html -->
+    <form action="{% url 'process_form' %}"  method="post">
+      {% csrf_token %}
+      <div class="form-row">
+      <div class="form-group">
+        <label for="input1"><h7 style="font-size: 20px;">State</h7></label>
+        
+      <select id="input1" name="input1" style="height: 50px; width: 200px; padding-left: 10px;">
+  <option value="Andaman and Nicobar">Andaman and Nicobar</option>
+  <option value="Andhra Pradesh">Andhra Pradesh</option>
+  <option value="Assam">Assam</option>
+  <option value="Chattisgarh">Chattisgarh</option>
+  <option value="Goa">Goa</option>
+  <option value="Gujarat">Gujarat</option>
+  <option value="Haryana">Haryana</option>
+  <option value="Himachal Pradesh">Himachal Pradesh</option>
+  <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+  <option value="Karnataka">Karnataka</option>
+  <option value="Kerala">Kerala</option>
+  <option value="Madhya Pradesh">Madhya Pradesh</option>
+  <option value="Maharashtra">Maharashtra</option>
+  <option value="Manipur">Manipur</option>
+  <option value="Meghalaya">Meghalaya</option>
+  <option value="Nagaland">Nagaland</option>
+  <option value="Odisha">Odisha</option>
+  <option value="Pondicherry">Pondicherry</option>
+  <option value="Punjab">Punjab</option>
+  <option value="Rajasthan">Rajasthan</option>
+  <option value="Tamil Nadu">Tamil Nadu</option>
+  <option value="Telangana">Telangana</option>
+  <option value="Tripura">Tripura</option>
+  <option value="Uttar Pradesh">Uttar Pradesh</option>
+  <option value="Uttrakhand">Uttrakhand</option>
+  <option value="West Bengal">West Bengal</option>
+</select>
+      </div>
+      <div class="form-group">
+        <label for="input2"><h7 style="font-size: 20px;">District</h7></label>
+        <select id="input2" name="input2" style="height: 50px; width: 200px;">
+  <option value="Cuddalore">Cuddalore</option>
+<option value="Hoshiarpur">Hoshiarpur</option>
+<option value="Malappuram">Malappuram</option>
+<option value="Gurdaspur">Gurdaspur</option>
+<option value="North Tripura">North Tripura</option>
+<option value="Ludhiana">Ludhiana</option>
+<option value="Surajpur">Surajpur</option>
+<option value="Dhar">Dhar</option>
+<option value="Kannuj">Kannuj</option>
+<option value="Thirssur">Thirssur</option>
+<option value="Panchmahals">Panchmahals</option>
+<option value="South District">South District</option>
+<option value="Sholapur">Sholapur</option>
+<option value="Villupuram">Villupuram</option>
+<option value="Bahraich">Bahraich</option>
+<option value="Khandwa">Khandwa</option>
+<option value="Angul">Angul</option>
+<option value="Kota">Kota</option>
+<option value="Sitapur">Sitapur</option>
+<option value="Faridabad">Faridabad</option>
+<option value="Gurgaon">Gurgaon</option>
+<option value="Bhatinda">Bhatinda</option>
+<option value="Kheda">Kheda</option>
+<option value="Thanjavur">Thanjavur</option>
+<option value="Jalaun (Orai)">Jalaun (Orai)</option>
+<option value="Narsinghpur">Narsinghpur</option>
+<option value="Thoubal">Thoubal</option>
+<option value="Kolhapur">Kolhapur</option>
+<option value="Vellore">Vellore</option>
+<option value="Anand">Anand</option>
+<option value="Vadodara(Baroda)">Vadodara(Baroda)</option>
+<option value="Kottayam">Kottayam</option>
+<option value="Fatehpur">Fatehpur</option>
+<option value="Satara">Satara</option>
+<option value="South Andaman">South Andaman</option>
+<option value="Sonitpur">Sonitpur</option>
+<option value="Malda">Malda</option>
+<option value="Mayurbhanja">Mayurbhanja</option>
+<option value="Jhansi">Jhansi</option>
+<option value="Darrang">Darrang</option>
+<option value="Coimbatore">Coimbatore</option>
+<option value="Bhadohi(Sant Ravi Nagar)">Bhadohi(Sant Ravi Nagar)</option>
+<option value="Kachchh">Kachchh</option>
+<option value="Khiri (Lakhimpur)">Khiri (Lakhimpur)</option>
+<option value="Ambala">Ambala</option>
+<option value="UdhamSinghNagar">UdhamSinghNagar</option>
+<option value="Ganjam">Ganjam</option>
+<option value="Kolar">Kolar</option>
+<option value="Kasargod">Kasargod</option>
+<option value="Baran">Baran</option>
+<option value="Etawah">Etawah</option>
+<option value="Bharuch">Bharuch</option>
+<option value="Aligarh">Aligarh</option>
+<option value="Lakhimpur">Lakhimpur</option>
+<option value="Bastar">Bastar</option>
+<option value="Baghpat">Baghpat</option>
+<option value="Karaikal">Karaikal</option>
+<option value="Muradabad">Muradabad</option>
+<option value="Jhabua">Jhabua</option>
+<option value="Nadia">Nadia</option>
+<option value="Dindigul">Dindigul</option>
+<option value="Mirzapur">Mirzapur</option>
+<option value="Burdwan">Burdwan</option>
+<option value="Ballia">Ballia</option>
+<option value="Ahmednagar">Ahmednagar</option>
+<option value="Ropar (Rupnagar)">Ropar (Rupnagar)</option>
+<option value="Khammam">Khammam</option>
+<option value="Jalgaon">Jalgaon</option>
+<option value="Nagercoil (Kannyiakumari)">Nagercoil (Kannyiakumari)</option>
+<option value="Valsad">Valsad</option>
+<option value="Imphal West">Imphal West</option>
+<option value="Gautam Budh Nagar">Gautam Budh Nagar</option>
+<option value="Kanpur">Kanpur</option>
+<option value="Rampur">Rampur</option>
+<option value="Hooghly">Hooghly</option>
+<option value="Jorhat">Jorhat</option>
+<option value="Kollam">Kollam</option>
+<option value="Amreli">Amreli</option>
+<option value="Gajapati">Gajapati</option>
+<option value="Tumkur">Tumkur</option>
+<option value="Bankura">Bankura</option>
+<option value="Buldhana">Buldhana</option>
+<option value="Sonbhadra">Sonbhadra</option>
+<option value="Alappuzha">Alappuzha</option>
+<option value="Nashik">Nashik</option>
+<option value="Nowarangpur">Nowarangpur</option>
+<option value="Farukhabad">Farukhabad</option>
+<option value="Etah">Etah</option>
+<option value="North 24 Parganas">North 24 Parganas</option>
+<option value="Patiala">Patiala</option>
+<option value="Mau(Maunathbhanjan)">Mau(Maunathbhanjan)</option>
+<option value="Kanker">Kanker</option>
+<option value="Jalore">Jalore</option>
+<option value="Bangalore">Bangalore</option>
+<option value="East Khasi Hills">East Khasi Hills</option>
+<option value="Dhubri">Dhubri</option>
+<option value="Mokokchung">Mokokchung</option>
+<option value="Dehradoon">Dehradoon</option>
+<option value="Shahjahanpur">Shahjahanpur</option>
+<option value="Jhalawar">Jhalawar</option>
+<option value="Muzaffarnagar">Muzaffarnagar</option>
+<option value="Surat">Surat</option>
+<option value="Murshidabad">Murshidabad</option>
+<option value="Ramanathapuram">Ramanathapuram</option>
+<option value="Medinipur(W)">Medinipur(W)</option>
+<option value="Tonk">Tonk</option>
+<option value="Sikar">Sikar</option>
+<option value="Dharmapuri">Dharmapuri</option>
+<option value="Balasore">Balasore</option>
+<option value="Kurnool">Kurnool</option>
+<option value="Bikaner">Bikaner</option>
+<option value="Jalandhar">Jalandhar</option>
+<option value="Kurukshetra">Kurukshetra</option>
+<option value="Mewat">Mewat</option>
+<option value="Chitrakut">Chitrakut</option>
+<option value="Bishnupur">Bishnupur</option>
+<option value="Ernakulam">Ernakulam</option>
+<option value="West Godavari">West Godavari</option>
+<option value="Sepahijala">Sepahijala</option>
+<option value="Hyderabad">Hyderabad</option>
+<option value="Sivaganga">Sivaganga</option>
+<option value="Bulandshahar">Bulandshahar</option>
+<option value="Erode">Erode</option>
+<option value="Karimnagar">Karimnagar</option>
+<option value="Dindori">Dindori</option>
+<option value="Kangra">Kangra</option>
+<option value="Amritsar">Amritsar</option>
+<option value="Salem">Salem</option>
+<option value="Saharanpur">Saharanpur</option>
+<option value="Sundergarh">Sundergarh</option>
+<option value="Sheopur">Sheopur</option>
+<option value="Muktsar">Muktsar</option>
+<option value="Virudhunagar">Virudhunagar</option>
+<option value="Nalgonda">Nalgonda</option>
+<option value="Krishnagiri">Krishnagiri</option>
+<option value="Kullu">Kullu</option>
+<option value="Pune">Pune</option>
+<option value="Ranga Reddy">Ranga Reddy</option>
+<option value="Anupur">Anupur</option>
+<option value="Puruliya">Puruliya</option>
+<option value="Nagpur">Nagpur</option>
+<option value="Namakkal">Namakkal</option>
+<option value="Kannur">Kannur</option>
+<option value="Raebarelli">Raebarelli</option>
+<option value="Agra">Agra</option>
+<option value="Mansa">Mansa</option>
+<option value="Panipat">Panipat</option>
+<option value="Ghaziabad">Ghaziabad</option>
+<option value="Imphal East">Imphal East</option>
+<option value="Allahabad">Allahabad</option>
+<option value="Uttar Dinajpur">Uttar Dinajpur</option>
+<option value="Barnala">Barnala</option>
+<option value="Kancheepuram">Kancheepuram</option>
+<option value="Badgam">Badgam</option>
+<option value="Chittor">Chittor</option>
+<option value="Chittorgarh">Chittorgarh</option>
+<option value="Jharsuguda">Jharsuguda</option>
+<option value="Sounth 24 Parganas">Sounth 24 Parganas</option>
+<option value="Nizamabad">Nizamabad</option>
+<option value="Badwani">Badwani</option>
+<option value="Jalpaiguri">Jalpaiguri</option>
+<option value="Cachar">Cachar</option>
+<option value="North Goa">North Goa</option>
+<option value="Mahoba">Mahoba</option>
+<option value="Thiruvannamalai">Thiruvannamalai</option>
+<option value="Nanded">Nanded</option>
+<option value="Bargarh">Bargarh</option>
+<option value="Barmer">Barmer</option>
+<option value="Thiruvananthapuram">Thiruvananthapuram</option>
+<option value="Dhenkanal">Dhenkanal</option>
+<option value="Chandel">Chandel</option>
+<option value="Kamrup">Kamrup</option>
+<option value="Madurai">Madurai</option>
+<option value="Tarntaran">Tarntaran</option>
+</select>
+      </div>
+      </div>
+      <br><br><br><br>
+      <div class="form-row">
+      <div class="form-group">
+        <label for="input3"><h7 style="font-size: 20px;">Crop Name</h7></label>
+        <input type="text" class="form-control" id="input3" name="input3">
+      </div>
+      <br><br><br><br>
+      <div class="form-group">
+        <label for="input4"><h7 style="font-size: 20px;">Date to released into Market</h7></label>
+        <input type="text" class="form-control" id="input4" name="input4">
+      </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <!-- Display the prediction results -->
+      {% if prediction %}
+      <h2>Prediction: {{ prediction }}</h2>
+      {% endif %}
+
+	  </div>
+
+  </body>
+</main>
+
+  <!-- End forms data -->
