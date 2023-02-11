@@ -58,7 +58,6 @@ def process_form(request):
         return render(request, 'ROI.html', prediction)
     return redirect(request, 'ROI.html')
 
-
 def form_submit(request):
     if request.method == 'POST':
         nitrogen = request.POST.get('input1')
@@ -71,10 +70,6 @@ def form_submit(request):
         with open('rfc_crop_recommendation.pkl','rb') as f:
             mod = pickle.load(f)
 
-        for i in range(10):
-            print()
-
-        print(nitrogen," ",phosphorus)
 
         # Call your machine learning model here
         prediction = mod.predict(np.array([nitrogen,phosphorus,potassium,90,humidity,ph_level,rain_fall]).reshape(1,-1))
@@ -85,10 +80,25 @@ def form_submit(request):
             print()
 
         print(prediction[0])
+        recommendation=prediction[0]
+        similar_crops = [['rice'],
+                         ['pomegranate', 'mango', 'orange', 'coconut', 'papaya', 'banana', 'watermelon', 'muskmelon'],
+                         ['grapes', 'coffee', 'apple'], ['cotton', 'maize', 'kidneybeans'],
+                         ['lentil', 'chickpea', 'pigeonpeas', 'blackgram', 'mungbean', 'mothbeans', 'jute']]
+
+        others=[]
+        for i in range(len(similar_crops)):
+            if recommendation in similar_crops[i]:
+
+                print("The alternate crops in decreasing order of profitability are")
+                for j in similar_crops[i]:
+                    if recommendation != j:
+                        print(j)
+                        others.append(j)
 
         predicted_crop = le.inverse_transform(prediction)[0]
 
-        result = {'prediction':predicted_crop}
+        result = {'prediction':predicted_crop,"alternate_recommendations":others}
         return render(request, 'index.html',result)
     return redirect('index')    
 
