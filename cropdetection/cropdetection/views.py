@@ -86,21 +86,20 @@ def form_submit(request):
                          ['grapes', 'coffee', 'apple'], ['cotton', 'maize', 'kidneybeans'],
                          ['lentil', 'chickpea', 'pigeonpeas', 'blackgram', 'mungbean', 'mothbeans', 'jute']]
 
+        predicted_crop = le.inverse_transform(prediction)[0]
         others=[]
         for i in range(len(similar_crops)):
-            if recommendation in similar_crops[i]:
+            if predicted_crop in similar_crops[i]:
 
                 print("The alternate crops in decreasing order of profitability are")
                 for j in similar_crops[i]:
-                    if recommendation != j:
+                    if predicted_crop != j:
                         print(j)
                         others.append(j)
 
-        predicted_crop = le.inverse_transform(prediction)[0]
-
         result = {'prediction':predicted_crop,"alternate_recommendations":others}
         return render(request, 'index.html',result)
-    return redirect('index')    
+    return redirect('index')
 
 def webpage1(request):
     return render(request,'dashboard.html')
