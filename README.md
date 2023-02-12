@@ -8,6 +8,6 @@ Dependencies required:
 
 1) python - 3.9.5 or higher
 2) Sci-kit learn -
-3) Django
+3) Django - 4.1.6. or higher
 4) pandas - 1.4.2. or higher
 5) 
