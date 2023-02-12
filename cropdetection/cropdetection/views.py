@@ -8,7 +8,53 @@ import pandas as pd
 
 
 def home(request):
-    return render(request, 'index.html')
+    # Make a request to the OpenWeatherMap API
+
+    KEY='66c277899013496cc5fcaf1fa85d5f4f'
+    city='Port Blair'
+
+    BASE_URL='http://api.openweathermap.org/data/2.5/weather?'
+
+    # Make the API request for weather data
+    response=requests.get(BASE_URL+'appid='+KEY+'&q='+city).json()
+
+
+    weather_data = response
+    print(weather_data)
+    
+    # Extract the relevant data from the response
+    humidity = weather_data['main']['humidity']
+    pressure = weather_data['main']['pressure']
+    wind_speed = weather_data['wind']['speed']
+    sunrise = weather_data['sys']['sunrise']
+    current_temp = weather_data['main']['temp']
+    rainfall = weather_data['weather'][0]['description']
+
+    print(humidity)
+
+    # Store the data in a dictionary to pass as context to the template
+    context = {
+        'humidity': humidity,
+        'pressure': pressure,
+        'wind_speed': wind_speed,
+        'sunrise': sunrise,
+        'current_temp': current_temp,
+        'rainfall': rainfall
+    }
+
+    # for i in range(10):
+    #     print()
+    # print(humidity," ",pressure)
+
+    return render(request, 'index.html', context)
+    # return render(request, 'index.html')
+
+import requests
+
+# def weather_view(request):
+    
+
+
 
 def backup_process_form(request):
     if request.method == 'POST':
@@ -29,7 +75,6 @@ def backup_process_form(request):
         return render(request, 'ROI.html',prediction)
     return redirect(request, 'ROI.html')
 
-
 def process_form(request):
     if request.method == 'POST':
         state = request.POST.get('input1')
@@ -37,26 +82,34 @@ def process_form(request):
         crop_name = request.POST.get('input3')
         date = request.POST.get('input4')
 
-        print(state)
-        for i in range(10):
+        print(state," ",district," ",crop_name," ",date)
+        for i in range(10): 
             print()
 
-        with open('expected_price_prediction.pkl', 'rb') as f:
+        with open('expected_price_prediction.pkl','rb') as f:
             mod = pickle.load(f)
-        with open('le_df2_comm.pkl', 'rb') as f:
+        with open('le_df2_comm.pkl','rb') as f:
             le_df2_comm = pickle.load(f)
-        with open('le_df2_state.pkl', 'rb') as f:
+        with open('le_df2_state.pkl','rb') as f:
             le_df2_state = pickle.load(f)
-        with open('le_df2_dist.pkl', 'rb') as f:
+        with open('le_df2_dist.pkl','rb') as f:
             le_df2_dist = pickle.load(f)
+
 
         prediction = mod.predict(np.array(
             [le_df2_state.transform([state])[0], le_df2_dist.transform([district])[0], le_df2_comm.transform([crop_name])[0],
-             date % 10000, (date // 10000) % 100, (date // 1000000) % 100]).reshape(1, -1))
+             date[0:4], date[5:7], date[-2:]]).reshape(1, -1))
         # prediction = mod.predict(np.array([state,  district,  crop_name, date%10000, (date//10000)%100, (date//1000000)%100, 8]).reshape(1,-1))
-        result = {'prediction': prediction}
-        return render(request, 'ROI.html', prediction)
+
+        # prediction = mod.predict(state, district, crop_name, date)
+        print("prediction----->",prediction)
+        for i in range(10): 
+            print()
+
+        result = {'prediction':prediction[0]}
+        return render(request, 'ROI.html',result)
     return redirect(request, 'ROI.html')
+
 
 def form_submit(request):
     if request.method == 'POST':
@@ -67,12 +120,26 @@ def form_submit(request):
         ph_level = request.POST.get('input5')
         rain_fall = request.POST.get('input6')
 
+        KEY='66c277899013496cc5fcaf1fa85d5f4f'
+        city='Port Blair'
+
+        BASE_URL='http://api.openweathermap.org/data/2.5/weather?'
+
+        # Make the API request for weather data
+        response=requests.get(BASE_URL+'appid='+KEY+'&q='+city).json()
+        weather_data = response
+        current_temp = weather_data['main']['temp']
+
         with open('rfc_crop_recommendation.pkl','rb') as f:
             mod = pickle.load(f)
 
+        for i in range(10):
+            print()
+
+        print(nitrogen," ",phosphorus)
 
         # Call your machine learning model here
-        prediction = mod.predict(np.array([nitrogen,phosphorus,potassium,90,humidity,ph_level,rain_fall]).reshape(1,-1))
+        prediction = mod.predict(np.array([nitrogen,phosphorus,potassium,current_temp,humidity,ph_level,rain_fall]).reshape(1,-1))
         with open('le.pkl','rb') as f:
             le=pickle.load(f)
 
@@ -80,29 +147,54 @@ def form_submit(request):
             print()
 
         print(prediction[0])
-        recommendation=prediction[0]
-        similar_crops = [['rice'],
-                         ['pomegranate', 'mango', 'orange', 'coconut', 'papaya', 'banana', 'watermelon', 'muskmelon'],
-                         ['grapes', 'coffee', 'apple'], ['cotton', 'maize', 'kidneybeans'],
-                         ['lentil', 'chickpea', 'pigeonpeas', 'blackgram', 'mungbean', 'mothbeans', 'jute']]
 
         predicted_crop = le.inverse_transform(prediction)[0]
-        others=[]
-        for i in range(len(similar_crops)):
-            if predicted_crop in similar_crops[i]:
 
-                print("The alternate crops in decreasing order of profitability are")
-                for j in similar_crops[i]:
-                    if predicted_crop != j:
-                        print(j)
-                        others.append(j)
-
-        result = {'prediction':predicted_crop,"alternate_recommendations":others}
+        result = {'prediction':predicted_crop}
         return render(request, 'index.html',result)
-    return redirect('index')
+    return redirect('index')    
 
 def webpage1(request):
-    return render(request,'dashboard.html')
+    # Make a request to the OpenWeatherMap API
+
+    KEY='66c277899013496cc5fcaf1fa85d5f4f'
+    city='Port Blair'
+
+    BASE_URL='http://api.openweathermap.org/data/2.5/weather?'
+
+    # Make the API request for weather data
+    response=requests.get(BASE_URL+'appid='+KEY+'&q='+city).json()
+
+
+    weather_data = response
+    print(weather_data)
+    
+    # Extract the relevant data from the response
+    humidity = weather_data['main']['humidity']
+    pressure = weather_data['main']['pressure']
+    wind_speed = weather_data['wind']['speed']
+    sunrise = weather_data['sys']['sunrise']
+    current_temp = weather_data['main']['temp']
+    rainfall = weather_data['weather'][0]['description']
+
+    print(humidity)
+
+    # Store the data in a dictionary to pass as context to the template
+    context = {
+        'humidity': humidity,
+        'pressure': pressure,
+        'wind_speed': wind_speed,
+        'sunrise': sunrise,
+        'current_temp': current_temp,
+        'rainfall': rainfall
+    }
+
+    # for i in range(10):
+    #     print()
+    # print(humidity," ",pressure)
+
+    return render(request, 'dashboard.html', context)
+
 
 def webpage2(request):
     return render(request,'tables.html')
