@@ -10,4 +10,5 @@ Dependencies required:
 2) Sci-kit learn -
 3) Django - 4.1.6. or higher
 4) pandas - 1.4.2. or higher
-5) 
+5) scikit-learn 1.7.2. or higher
+6) 
