@@ -14,5 +14,5 @@ Crop prediction project as a part of the Tri - NIT hackathon.
 
 ## How to run:
 
-`cd cropdetection`
+`cd cropdetection`<br>
 `manage.py runserver`
