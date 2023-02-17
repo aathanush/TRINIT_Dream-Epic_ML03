@@ -156,8 +156,8 @@ def form_submit(request):
 
 def webpage1(request):
     # Make a request to the OpenWeatherMap API
-
-    KEY='66c277899013496cc5fcaf1fa85d5f4f'
+    with open('views_secret.txt') as f:
+        KEY=f.readline()
     city='Port Blair'
 
     BASE_URL='http://api.openweathermap.org/data/2.5/weather?'
