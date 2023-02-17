@@ -4,7 +4,7 @@
 <b> Problem Statement ID:</b> ML03
 Crop prediction project as a part of the Tri - NIT hackathon.
 
-Dependencies required:
+## Dependencies required:
 
 1) python - 3.9.5 or higher
 2) Django - 4.1.6. or higher
@@ -12,3 +12,7 @@ Dependencies required:
 4) scikit-learn 1.7.2. or higher
 5) numpy - 1.21.6 or higher
 
+## How to run:
+
+`cd cropdetection`
+`manage.py runserver`
